@@ -29,3 +29,32 @@ self.addEventListener('install', function(e) {
         })
     );
 });
+
+self.addEventListener('fetch', function(e){
+    e.respondWith(
+        caches.match(e.request).then(function(response){
+            
+            if (response) {
+                console.log("Found..", e.request, "in cache,");
+                return response;
+            } 
+            
+            else {
+                console.log("NOT Found..", e.request, "in cache, fetching");
+                return fetch(e.request)
+                .then(function(response){
+                    const responsedClone = response.clone();
+                    caches.open('v1').then(function(cache) {
+                        cache.put(e.request, responsedClone);
+                })
+                return response;
+            })
+            .catch(function(err){
+                console.log(err)
+            });
+
+            }
+
+        })
+    );
+});
