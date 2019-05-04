@@ -1,6 +1,6 @@
 console.log("Service Worker: is WORKING...");
 
-// const cacheName = 'restaurant-cache-v1';
+ const cacheName = 'restaurant-cache-v1';
 
 const cacheFiles = [
 '/',
@@ -23,6 +23,7 @@ const cacheFiles = [
 '/img/10.jpg',
 ];
 
+/*
 self.addEventListener('install', function(e) {
     e.waitUntil(
         caches.open('v1').then(function(cache) {
@@ -60,7 +61,8 @@ self.addEventListener('fetch', function(e){
     );
 });
 
-/*
+*/
+
 // Install service worker
 self.addEventListener('install ', function(e) {
     e.waitUntil(
@@ -100,4 +102,3 @@ self.addEventListener('fetch', function(e) {
     );
   });
 
-*/
