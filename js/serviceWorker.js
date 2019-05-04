@@ -1,5 +1,6 @@
 console.log("Service Worker: is WORKING...");
 
+// const cacheName = 'restaurant-cache-v1';
 
 const cacheFiles = [
 '/',
@@ -58,3 +59,45 @@ self.addEventListener('fetch', function(e){
         })
     );
 });
+
+/*
+// Install service worker
+self.addEventListener('install ', function(e) {
+    e.waitUntil(
+        caches.open(cacheName).then(function(cache) {
+            return cache.addAll(cacheFiles);
+        })
+    );
+});
+
+// Remove previous caches..
+self.addEventListener('activate', function(e) {
+  e.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          return cacheName.startsWith('restaurant-') &&
+                 cacheName != cacheName;
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
+    })
+  );
+});
+
+// Fetch cache and add new elements to cache.
+self.addEventListener('fetch', function(e) {
+    e.respondWith(
+      caches.open(cacheName).then(function(cache) {
+        return cache.match(e.request).then(function (response) {
+          return response || fetch(e.request).then(function(response) {
+            cache.put(e.request, response.clone());
+            return response;
+          });
+        });
+      })
+    );
+  });
+
+*/
